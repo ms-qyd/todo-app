@@ -2,6 +2,7 @@
 const addButton = document.getElementById('add-task');
 const newTaskInput = document.getElementById('new-task');
 const taskList = document.getElementById('task-list');
+let globalCounter = 0;
 
 if (newTaskInput) {
     newTaskInput.value = 'Task ' + ++globalCounter;
