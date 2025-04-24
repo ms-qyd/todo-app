@@ -1,5 +1,13 @@
-function generateId(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+const companyData = {
+    "Nour Tech": ["Ali", "Leila", "Hassan", "Noor"],             // Middle Eastern
+    "Shinobi Systems": ["Hiroshi", "Satoshi", "Yoko", "Akira"],  // Japanese
+    "IndiCore": ["Raj", "Avi", "Neel", "Tia"],                  // Indian
+    "ÉlanTech": ["Émile", "Chloé", "Léa", "Rémi"]               // French
+};
+
+function getRandomKey(obj) {
+    const keys = Object.keys(obj);
+    return keys[Math.floor(Math.random() * keys.length)];
 }
 
 function getOrGenerateIds() {
@@ -7,8 +15,10 @@ function getOrGenerateIds() {
     let accountId = localStorage.getItem('accountId');
 
     if (!visitorId || !accountId) {
-        visitorId = generateId(100, 300);
-        accountId = generateId(10, 20);
+        accountId = getRandomKey(companyData);
+        const visitorNames = companyData[accountId];
+        visitorId = visitorNames[Math.floor(Math.random() * visitorNames.length)];
+
         localStorage.setItem('visitorId', visitorId);
         localStorage.setItem('accountId', accountId);
     }
@@ -19,5 +29,5 @@ function getOrGenerateIds() {
 function resetIds() {
     localStorage.removeItem('visitorId');
     localStorage.removeItem('accountId');
-    location.reload(); // Refresh to reinitialize everything
+    location.reload();
 }
